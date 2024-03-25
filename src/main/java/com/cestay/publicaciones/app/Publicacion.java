@@ -5,15 +5,16 @@ import java.util.List;
 
 public class Publicacion {
 
-    private long id;
+    private Long id;
     private String titulo;
     private String contenido;
     private String autor;
+    private double promedioCalificaciones;
 
     private List<Calificacion> calificaciones = new ArrayList<>();
     private List<Comentario> comentarios = new ArrayList<>();
 
-    public Publicacion(long id, String titulo, String contenido, String autor) {
+    public Publicacion(Long id, String titulo, String contenido, String autor) {
         this.id = id;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -22,7 +23,7 @@ public class Publicacion {
         this.calificaciones = new ArrayList<>();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -44,6 +45,27 @@ public class Publicacion {
 
     public void setCalificacion(Calificacion calificacion) {
         this.calificaciones.add(calificacion);
+        calculateAverage();
     }
 
+    private void calculateAverage() {
+        double sum = 0;
+        for (Calificacion calificacion : calificaciones) {
+            sum += calificacion.getCalificacion();
+        }
+        double average = sum / calificaciones.size();
+        this.promedioCalificaciones = average;
+    }
+
+    public double getPromedioCalificaciones() {
+        return promedioCalificaciones;
+    }
+
+    public List<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
 }
