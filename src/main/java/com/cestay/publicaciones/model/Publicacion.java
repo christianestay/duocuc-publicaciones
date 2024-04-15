@@ -1,4 +1,4 @@
-package com.cestay.publicaciones.app;
+package com.cestay.publicaciones.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class Publicacion {
     private void calculateAverage() {
         double sum = 0;
         for (Calificacion calificacion : calificaciones) {
-            sum += calificacion.getCalificacion();
+            sum += calificacion.getNota();
         }
         double average = sum / calificaciones.size();
         this.promedioCalificaciones = average;

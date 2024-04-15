@@ -1,4 +1,4 @@
-package com.cestay.publicaciones.app;
+package com.cestay.publicaciones.model;
 
 public class Comentario {
 
