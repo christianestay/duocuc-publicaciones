@@ -3,24 +3,44 @@ package com.cestay.publicaciones.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
+@Table(name = "publicaciones")
 public class Publicacion {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "contenido")
     private String contenido;
+
+    @Column(name = "autor")
     private String autor;
+
+    @Column(name = "promedio_calificaciones")
     private double promedioCalificaciones;
 
-    private List<Calificacion> calificaciones = new ArrayList<>();
-    private List<Comentario> comentarios = new ArrayList<>();
-
-    public Publicacion(Long id, String titulo, String contenido, String autor) {
-        this.id = id;
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public void setAutor(String autor) {
         this.autor = autor;
-        this.comentarios = new ArrayList<>();
-        this.calificaciones = new ArrayList<>();
     }
 
     public Long getId() {
@@ -39,33 +59,4 @@ public class Publicacion {
         return autor;
     }
 
-    public void setComentario(Comentario comentario) {
-        this.comentarios.add(comentario);
-    }
-
-    public void setCalificacion(Calificacion calificacion) {
-        this.calificaciones.add(calificacion);
-        calculateAverage();
-    }
-
-    private void calculateAverage() {
-        double sum = 0;
-        for (Calificacion calificacion : calificaciones) {
-            sum += calificacion.getNota();
-        }
-        double average = sum / calificaciones.size();
-        this.promedioCalificaciones = average;
-    }
-
-    public double getPromedioCalificaciones() {
-        return promedioCalificaciones;
-    }
-
-    public List<Calificacion> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-}
+ }
